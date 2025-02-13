@@ -7,6 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Locataires</title>
 </head>
+
+<x-app-layout>
+    <x-slot name="header"></x-slot>
+
     <div class="container text-light">
         <hr>
         <a href="{{ route('tenants.create') }}" class="btn btn-primary">Ajouter un locataire</a>
@@ -37,22 +41,23 @@
                         <td class="p-3"> <a href="{{ route('tenants.edit', $tenant->id) }}" class="btn btn-light">Modifier</a></td>
                         <td class="p-3"><a href="{{ route('tenants.show', $tenant->id) }}" class="btn btn-light">Voir</a></td>
                     </tr>
-
-                        <td class="p-3">
-                            <form action="{{ route('tenants.destroy') }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <input type="hidden" value="{{ $tenant->id }}" name="id">
-                                <button class="btn btn-danger" type="submit">Supprimer</button>
-                            </form>
-                        </td>
+                    
+                    <td class="p-3">
+                        <form action="{{ route('tenants.destroy') }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <input type="hidden" value="{{ $tenant->id }}" name="id">
+                            <button class="btn btn-danger" type="submit">Supprimer</button>
+                        </form>
+                    </td>
                     @endforeach
                 </tbody>
             </table>
         </div>
-
+        
     </div>
-
-    </body>
+    
+</x-app-layout>
+</body>
 
 </html>
