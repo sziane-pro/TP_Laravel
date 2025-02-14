@@ -32,8 +32,8 @@
                                             <td class="p-3">{{ $box->id }}</td>
                                             <td class="p-3">{{ $box->name }}</td>
                                             <td class="p-3">{{ $box->address }}</td>
-                                            <td class="p-3">{{ $box->price }}</td>
-                                            <td class="p-3">{{ $box->size }}</td>
+                                            <td class="p-3">{{ $box->price }}€</td>
+                                            <td class="p-3">{{ $box->size }}m2</td>
                                             <td class="p-3"> <a href="{{ route('boxes.edit', $box->id) }}"
                                                     class="btn btn-light">Modifier</a></td>
                                             <td class="p-3"><a href="{{ route('boxes.show', $box->id) }}"
