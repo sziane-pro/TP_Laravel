@@ -22,12 +22,18 @@
                                 <thead>
                                     <th class="p-3">Id</th>
                                     <th class="p-3">Nom</th>
+                                    <th class="p-3">Adresse</th>
+                                    <th class="p-3">Prix</th>
+                                    <th class="p-3">Superficie</th>
                                 </thead>
                                 <tbody>
                                     @foreach ($boxes as $box)
                                         <tr>
                                             <td class="p-3">{{ $box->id }}</td>
                                             <td class="p-3">{{ $box->name }}</td>
+                                            <td class="p-3">{{ $box->address }}</td>
+                                            <td class="p-3">{{ $box->price }}</td>
+                                            <td class="p-3">{{ $box->size }}</td>
                                             <td class="p-3"> <a href="{{ route('boxes.edit', $box->id) }}"
                                                     class="btn btn-light">Modifier</a></td>
                                             <td class="p-3"><a href="{{ route('boxes.show', $box->id) }}"

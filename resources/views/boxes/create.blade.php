@@ -13,6 +13,12 @@
         @csrf
         <label for="name">Nom</label>
         <input type="text" name="name" id="name">
+        <label for="address">Adresse</label>
+        <input type="text" name="address" id="address">
+        <label for="price">Prix</label>
+        <input type="text" name="price" id="price">
+        <label for="size">Superficie</label>
+        <input type="text" name="size" id="size">
         <br>
         <button type="submit">Ajouter</button>
     </form>

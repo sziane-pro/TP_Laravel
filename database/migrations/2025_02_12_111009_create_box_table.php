@@ -14,7 +14,10 @@ return new class extends Migration
         Schema::create('boxes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->string('address');
+            $table->string('price');
+            $table->string('size');
+            $table->unsignedBigInteger('owner_id')->nullable();
             $table->timestamps();
         });
     }

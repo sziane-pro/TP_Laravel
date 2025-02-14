@@ -10,6 +10,9 @@
 
     <div class="card-body">
         <p>Nom : {{ $boxes->name }}</p>
+        <p>Adresse : {{ $boxes->address }}</p>
+        <p>Prix : {{ $boxes->price }}</p>
+        <p>Superficie : {{ $boxes->size }}</p>
     </div>
 
 

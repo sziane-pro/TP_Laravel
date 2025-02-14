@@ -18,6 +18,12 @@
         <div class="form-group col-md-6 p-2">
             <label for="name">Nom</label>
             <input type="text" class="form-control mt-3" id="name" name="name" value="{{ $boxes->name }}" required>
+            <label for="address">Adresse</label>
+            <input type="text" class="form-control mt-3" id="address" name="address" value="{{ $boxes->address }}" required>
+            <label for="price">Prix</label>
+            <input type="text" class="form-control mt-3" id="price" name="price" value="{{ $boxes->price }}" required>
+            <label for="size">Superficie</label>
+            <input type="text" class="form-control mt-3" id="size" name="size" value="{{ $boxes->size }}" required>
         </div>
 
         <div class="form-group p-2 mt-3">

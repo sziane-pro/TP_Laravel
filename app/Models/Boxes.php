@@ -8,7 +8,10 @@ class Boxes extends Model
 {
     protected $fillable = [
         'name',
-        'user_id'
+        'address',
+        'price',
+        'size',
+        'owner_id'
     ];
 
     public function user()
