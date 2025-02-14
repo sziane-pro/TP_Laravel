@@ -15,7 +15,7 @@
         <p>Téléphone : {{ $tenants->phone }}</p>
         <p>Adresse : {{ $tenants->address }}</p>
         <p>IBAN : {{ $tenants->IBAN }}</p>
-        <p>User ID : {{ $tenants->owner_id }}</p>
+        <p>User ID : {{ $tenants->user_id }}</p>
     </div>
 
 

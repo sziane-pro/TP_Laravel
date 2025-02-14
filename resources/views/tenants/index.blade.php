@@ -37,7 +37,7 @@
                         <td class="p-3">{{ $tenant->phone }}</td>
                         <td class="p-3">{{ $tenant->address }}</td>
                         <td class="p-3">{{ $tenant->IBAN }}</td>
-                        <td class="p-3">{{ $tenant->owner_id }}</td>
+                        <td class="p-3">{{ $tenant->user_id }}</td>
                         <td class="p-3"> <a href="{{ route('tenants.edit', $tenant->id) }}" class="btn btn-light">Modifier</a></td>
                         <td class="p-3"><a href="{{ route('tenants.show', $tenant->id) }}" class="btn btn-light">Voir</a></td>
                     </tr>

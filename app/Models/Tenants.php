@@ -13,7 +13,7 @@ class Tenants extends Model
         'phone',
         'address',
         'IBAN',
-        'owner_id'
+        'user_id'
     ];
 
     public function box()

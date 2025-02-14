@@ -11,7 +11,7 @@ class BoxController extends Controller
 {
     public function index()
     {
-        $boxes = Boxes::where('owner_id', Auth::id())->get();
+        $boxes = Boxes::where('user_id', Auth::id())->get();
         return view('boxes.index', compact('boxes'));
     }
     
@@ -33,7 +33,7 @@ class BoxController extends Controller
             'address' => $request->address,
             'price' => $request->price,
             'size' => $request->size,
-            'owner_id' => Auth::id(),
+            'user_id' => Auth::id(),
         ]);
         return redirect()->route('boxes.index');
     }

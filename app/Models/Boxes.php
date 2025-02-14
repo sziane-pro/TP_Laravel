@@ -11,7 +11,7 @@ class Boxes extends Model
         'address',
         'price',
         'size',
-        'owner_id'
+        'user_id'
     ];
 
     public function user()

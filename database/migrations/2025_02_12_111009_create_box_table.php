@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('price');
             $table->string('size');
-            $table->unsignedBigInteger('owner_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
         });
     }

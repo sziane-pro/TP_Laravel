@@ -11,7 +11,7 @@ class TenantController extends Controller
 {
     public function index()
     {
-        $tenants = Tenants::where('owner_id', Auth::id())->get();
+        $tenants = Tenants::where('user_id', Auth::id())->get();
         return view('tenants.index', compact('tenants'));
     }
 
@@ -35,7 +35,7 @@ class TenantController extends Controller
             'phone' => $request->phone,
             'address' => $request->address,
             'IBAN' => $request->IBAN,
-            'owner_id' => Auth::id(),
+            'user_id' => Auth::id(),
         ]);
         return redirect()->route('tenants.index');
     }
