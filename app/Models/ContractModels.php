@@ -48,11 +48,6 @@ class ContractModels extends Model
         return json_encode($data);
     }
 
-
-
-
-
-
     public function user()
     {
         return $this->belongsTo(User::class);

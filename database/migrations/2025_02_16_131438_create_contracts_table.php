@@ -18,7 +18,8 @@ return new class extends Migration
             $table->decimal('monthly_price', 8, 2);
             $table->foreignId('boxes_id')->constrained()->onDelete('cascade');
             $table->foreignId('tenants_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // propriétaire du contrat
+            $table->foreignId('contract_models_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

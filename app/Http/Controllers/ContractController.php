@@ -8,6 +8,7 @@ use App\Models\Tenants;
 use App\Models\ContractModels;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class ContractController extends Controller
 {
@@ -26,10 +27,11 @@ class ContractController extends Controller
      */
     public function create()
     {
-        // Vous pouvez aussi récupérer la liste des boxes et des locataires
+
         $boxes = Boxes::where('user_id', Auth::id())->get();
-        $tenants = Tenants::all();
-        return view('contracts.create', compact('boxes', 'tenants'));
+        $tenants = Tenants::where('user_id', Auth::id())->get();
+        $contractModels = ContractModels::where('user_id', Auth::id())->get();
+        return view('contracts.create', compact('boxes', 'tenants', 'contractModels'));
     }
 
     /**
@@ -43,6 +45,7 @@ class ContractController extends Controller
             'monthly_price' => 'required|numeric',
             'boxes_id' => 'required|exists:boxes,id',
             'tenants_id' => 'required|exists:tenants,id',
+            'contract_models_id' => 'required|exists:contract_models,id',
         ]);
 
         $validated['user_id'] = Auth::id();
@@ -60,12 +63,17 @@ class ContractController extends Controller
         return view('contracts.show', compact('contracts'));
     }
 
-    public function preview($id)
+    public function preview(Request $request, $id)
     {
         $contract = Contracts::findOrFail($id);
-        $contractModel = ContractModels::first(); 
+        $tenant = $contract->tenant;
     
-        $tenant = $contract->tenant;  
+        // Vérifier si un modèle de contrat a été sélectionné
+        $contractModel = ContractModels::find($contract->contract_models_id);
+    
+        if (!$contractModel) {
+            return redirect()->route('contracts.index')->with('error', 'Veuillez sélectionner un modèle de contrat.');
+        }
     
         $tenantData = [
             'nom'           => $tenant->lastname,
@@ -80,13 +88,12 @@ class ContractController extends Controller
         ];
     
         $finalContract = $contractModel->generateContractContent($tenantData);
+
+
     
         return view('contract-models.preview', compact('finalContract'));
     }
     
-
-
-
     /**
      * Affiche le formulaire d'édition.
      */
