@@ -9,9 +9,6 @@ use Carbon\Carbon;
 
 class PaymentController extends Controller
 {
-    /**
-     * Affiche la liste des paiements d'un contrat
-     */
     public function index($contractId)
     {
         $contract = Contracts::findOrFail($contractId);
@@ -19,9 +16,6 @@ class PaymentController extends Controller
         return view('payments.index', compact('contract', 'payments'));
     }
 
-    /**
-     * Génère automatiquement les paiements lors de la création du contrat
-     */
     public static function generatePayments(Contracts $contract)
     {
         $currentDate = Carbon::parse($contract->date_start);
@@ -38,9 +32,6 @@ class PaymentController extends Controller
         }
     }
 
-    /**
-     * Met à jour l'état d'un paiement
-     */
     public function update(Request $request, $id)
     {
         $payment = Payment::findOrFail($id);
@@ -50,6 +41,4 @@ class PaymentController extends Controller
         ]);
         return redirect()->back()->with('success', 'Paiement mis à jour avec succès.');
     }
-
-    
 }

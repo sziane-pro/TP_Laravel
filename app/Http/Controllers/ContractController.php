@@ -12,9 +12,6 @@ use Illuminate\Support\Facades\Log;
 
 class ContractController extends Controller
 {
-    /**
-     * Affiche la liste des contrats.
-     */
     public function index()
     {
         // On récupère tous les contrats du propriétaire connecté
@@ -22,9 +19,6 @@ class ContractController extends Controller
         return view('contracts.index', compact('contracts'));
     }
 
-    /**
-     * Affiche le formulaire de création.
-     */
     public function create()
     {
 
@@ -34,9 +28,6 @@ class ContractController extends Controller
         return view('contracts.create', compact('boxes', 'tenants', 'contractModels'));
     }
 
-    /**
-     * Stocke un nouveau contrat en base.
-     */
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -52,15 +43,11 @@ class ContractController extends Controller
 
         $contract = Contracts::create($validated);
 
-        // Générer les paiements mensuels pour ce contrat
         PaymentController::generatePayments($contract);
 
         return redirect()->route('contracts.index')->with('success', 'Contrat créé avec succès.');
     }
 
-    /**
-     * Affiche un contrat.
-     */
     public function show($id)
     {
         $contracts = Contracts::findOrFail($id); 
@@ -98,9 +85,6 @@ class ContractController extends Controller
         return view('contract-models.preview', compact('finalContract'));
     }
 
-    /**
-     * Affiche le formulaire d'édition.
-     */
     public function edit($id)
     {
         $contract = Contracts::findOrFail($id); 
@@ -110,11 +94,7 @@ class ContractController extends Controller
     
         return view('contracts.edit', compact('contract', 'boxes', 'tenants', 'contractModels')); 
     }
-    
 
-    /**
-     * Met à jour un contrat.
-     */
     public function update(Request $request, Contracts $contracts)
     {
         $validated = $request->validate([
@@ -130,9 +110,6 @@ class ContractController extends Controller
         return redirect()->route('contracts.index')->with('success', 'Contrat mis à jour avec succès.');
     }
 
-    /**
-     * Supprime un contrat.
-     */
     public function destroy(Request $request)
     {
         $contracts = Contracts::findOrFail($request->get('id'));

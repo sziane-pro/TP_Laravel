@@ -39,7 +39,6 @@ class ContractModelController extends Controller
     public function show($id)
     {
         $contractModels = ContractModels::findOrFail($id);
-        // Pour l'affichage, on encode à nouveau en JSON (si besoin pour Editor.js)
         $contractModels->content = json_encode($contractModels->content);
         return view('contract-models.show', compact('contractModels'));
     }
@@ -50,15 +49,11 @@ class ContractModelController extends Controller
         return view('contract-models.edit', compact('contractModels'));
     }
 
-    /**
-     * Génère un contrat final en remplaçant les variables du modèle par les données du locataire.
-     */
     public function generateContract($contractModelsId, $tenantId)
     {
         $contractModels = ContractModels::findOrFail($contractModelsId);
         $tenants = Tenants::findOrFail($tenantId);
 
-        // Préparer les données du locataire sous forme de tableau associatif.
         $tenantData = [
             'nom'     => $tenants->last_name,
             'prenom'  => $tenants->first_name,
@@ -68,7 +63,6 @@ class ContractModelController extends Controller
             'IBAN'    => $tenants->IBAN,
         ];
 
-        // Générer le contrat final avec remplacement des placeholders.
         $finalContract = $contractModels->generateContractContent($tenantData);
 
         return view('contract-models.preview', compact('finalContract'));

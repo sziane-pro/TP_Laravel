@@ -13,20 +13,10 @@ class ContractModels extends Model
         'user_id'
     ];
 
-    // Le contenu est automatiquement converti en tableau lors de l'accès
     protected $casts = [
         'content' => 'array',
     ];
-
-    /**
-     * Génère le contenu final du contrat en remplaçant les placeholders par les valeurs fournies.
-     *
-     * Les placeholders dans le modèle doivent être au format {nom}, {prenom}, etc.
-     *
-     * @param array $tenantData Tableau associatif contenant les données du locataire.
-     * @return string Le contenu du contrat final, encodé en JSON.
-     */
-
+    
     public function generateContractContent(array $tenantData)
     {
        
