@@ -28,7 +28,7 @@
                                 @foreach ($contractModels as $contract)
                                     <tr>
                                         <td>{{ $contract->name }}</td>
-                                        <td>
+                                        <td class="actions">
                                             <a href="{{ route('contract-models.show', $contract->id) }}"
                                                 class="btn btn-info">Voir</a>
                                             <a href="{{ route('contract-models.edit', $contract->id) }}"

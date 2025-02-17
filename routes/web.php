@@ -5,6 +5,7 @@ use App\Http\Controllers\BoxController;
 use App\Http\Controllers\TenantController;
 use App\Http\Controllers\ContractModelController;
 use App\Http\Controllers\ContractController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -37,7 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/tenants/{id}/edit', [TenantController::class, 'edit'])->name('tenants.edit');
     Route::put('/tenants/{id}/update', [TenantController::class, 'update'])->name('tenants.update');
     Route::delete('/tenants', [TenantController::class, 'destroy'])->name('tenants.destroy');
-    
+
     // Gestion des modeles de contrats
     Route::get('/contract-models', [ContractModelController::class, 'index'])->name('contract-models.index');
     Route::get('/contract-models/create', [ContractModelController::class, 'create'])->name('contract-models.create');
@@ -57,6 +58,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/contracts', [ContractController::class, 'destroy'])->name('contracts.destroy');
     Route::get('/contracts/{id}/preview', [ContractController::class, 'preview'])->name('contracts.preview');
 
+    // Routes pour le suivi des paiements
+    Route::get('/contracts/{id}/payments', [PaymentController::class, 'index'])->name('payments.index');
+    Route::put('/payments/{id}', [PaymentController::class, 'update'])->name('payments.update');
+
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

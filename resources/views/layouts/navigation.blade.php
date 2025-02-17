@@ -111,3 +111,13 @@
         </div>
     </div>
 </nav>
+<style>
+    td{
+        padding: 1rem;
+    }
+
+    .actions{
+        display: flex;
+        gap: 1rem;
+    }
+</style>

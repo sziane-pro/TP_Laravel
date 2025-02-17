@@ -50,7 +50,10 @@ class ContractController extends Controller
 
         $validated['user_id'] = Auth::id();
 
-        Contracts::create($validated);
+        $contract = Contracts::create($validated);
+
+        // Générer les paiements mensuels pour ce contrat
+        PaymentController::generatePayments($contract);
 
         return redirect()->route('contracts.index')->with('success', 'Contrat créé avec succès.');
     }
@@ -58,8 +61,9 @@ class ContractController extends Controller
     /**
      * Affiche un contrat.
      */
-    public function show(Contracts $contracts)
+    public function show($id)
     {
+        $contracts = Contracts::findOrFail($id); 
         return view('contracts.show', compact('contracts'));
     }
 
@@ -67,42 +71,46 @@ class ContractController extends Controller
     {
         $contract = Contracts::findOrFail($id);
         $tenant = $contract->tenant;
-    
+
         // Vérifier si un modèle de contrat a été sélectionné
         $contractModel = ContractModels::find($contract->contract_models_id);
-    
+
         if (!$contractModel) {
             return redirect()->route('contracts.index')->with('error', 'Veuillez sélectionner un modèle de contrat.');
         }
-    
+
         $tenantData = [
-            'nom'           => $tenant->lastname,
-            'prenom'        => $tenant->firstname,
-            'email'         => $tenant->email,
-            'phone'         => $tenant->phone,
-            'adresse'       => $tenant->address,
-            'IBAN'          => $tenant->IBAN,
-            'date_start'    => $contract->date_start,
-            'date_end'      => $contract->date_end,
+            'nom' => $tenant->lastname,
+            'prenom' => $tenant->firstname,
+            'email' => $tenant->email,
+            'phone' => $tenant->phone,
+            'adresse' => $tenant->address,
+            'IBAN' => $tenant->IBAN,
+            'date_start' => $contract->date_start,
+            'date_end' => $contract->date_end,
             'monthly_price' => $contract->monthly_price,
         ];
-    
+
         $finalContract = $contractModel->generateContractContent($tenantData);
 
 
-    
+
         return view('contract-models.preview', compact('finalContract'));
     }
-    
+
     /**
      * Affiche le formulaire d'édition.
      */
-    public function edit(Contracts $contracts)
+    public function edit($id)
     {
+        $contract = Contracts::findOrFail($id); 
         $boxes = Boxes::where('user_id', Auth::id())->get();
-        $tenants = Tenants::all();
-        return view('contracts.edit', compact('contracts', 'boxes', 'tenants'));
+        $tenants = Tenants::where('user_id', Auth::id())->get();
+        $contractModels = ContractModels::where('user_id', Auth::id())->get();
+    
+        return view('contracts.edit', compact('contract', 'boxes', 'tenants', 'contractModels')); 
     }
+    
 
     /**
      * Met à jour un contrat.
@@ -127,7 +135,7 @@ class ContractController extends Controller
      */
     public function destroy(Request $request)
     {
-        $contracts = Contracts::findOrFail($request-> get('id'));
+        $contracts = Contracts::findOrFail($request->get('id'));
         $contracts->delete();
 
         return redirect()->route('contracts.index')->with('success', 'Contrat supprimé avec succès.');

@@ -16,7 +16,6 @@ class Contracts extends Model
         'user_id',
     ];
 
-    // Définition des relations (adaptées à votre modèle)
     public function box()
     {
         return $this->belongsTo(Boxes::class, 'boxes_id');
@@ -30,6 +29,11 @@ class Contracts extends Model
     public function contractModel()
     {
         return $this->belongsTo(ContractModels::class, 'contract_models_id');
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class, 'contract_id');
     }
 
     public function user()
