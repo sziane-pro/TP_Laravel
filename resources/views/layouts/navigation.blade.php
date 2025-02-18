@@ -114,4 +114,4 @@
 <?php
 $baseURL = "http://$_SERVER[HTTP_HOST]/TP_Laravel/";
 ?>
-<link rel="stylesheet" href="../resources/css/style.css">
+<link rel="stylesheet" href="<?php echo $baseURL; ?>/build/assets/style.css">
