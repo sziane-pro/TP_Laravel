@@ -15,46 +15,39 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <div class="container text-light">
-                        <hr>
-                        <a href="{{ route('boxes.create') }}" class="btn btn-primary">Ajouter un box</a>
-                        <hr>
-                        <div class="row d-flex justify-content-between align-items-center">
+                    <div class="wrapper">
+                        <a href="{{ route('boxes.create') }}" class="btn btn-green">Ajouter un box</a>
+                        <div class="">
                             <table>
                                 <thead>
-                                    <th class="p-3">Id</th>
-                                    <th class="p-3">Nom</th>
-                                    <th class="p-3">Adresse</th>
-                                    <th class="p-3">Prix</th>
-                                    <th class="p-3">Superficie</th>
+                                    <th>Id</th>
+                                    <th>Nom</th>
+                                    <th>Adresse</th>
+                                    <th>Prix</th>
+                                    <th>Superficie</th>
+                                    <th>Actions</th>
                                 </thead>
                                 <tbody>
                                     @foreach ($boxes as $box)
                                         <tr>
-                                            <td class="p-3">{{ $box->id }}</td>
-                                            <td class="p-3">{{ $box->name }}</td>
-                                            <td class="p-3">{{ $box->address }}</td>
-                                            <td class="p-3">{{ $box->price }}€</td>
-                                            <td class="p-3">{{ $box->size }}m2</td>
-                                            <td class="p-3"> <a href="{{ route('boxes.edit', $box->id) }}"
-                                                    class="btn btn-light">Modifier</a></td>
-                                            <td class="p-3"><a href="{{ route('boxes.show', $box->id) }}"
-                                                    class="btn btn-light">Voir</a></td>
+                                            <td>{{ $box->id }}</td>
+                                            <td>{{ $box->name }}</td>
+                                            <td>{{ $box->address }}</td>
+                                            <td>{{ $box->price }}€</td>
+                                            <td>{{ $box->size }}m<sup>2</sup></td>
+                                            <td class="actions"> <a href="{{ route('boxes.edit', $box->id) }}" class="btn btn-blue">Modifier</a><a href="{{ route('boxes.show', $box->id) }}" class="btn btn-blue">Voir</a>
+                                                <form action="{{ route('boxes.destroy') }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <input type="hidden" value="{{ $box->id }}" name="id">
+                                                    <button class="btn btn-red" type="submit">Supprimer</button>
+                                                </form>
+                                            </td>
                                         </tr>
-
-                                        <td class="p-3">
-                                            <form action="{{ route('boxes.destroy') }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <input type="hidden" value="{{ $box->id }}" name="id">
-                                                <button class="btn btn-danger" type="submit">Supprimer</button>
-                                            </form>
-                                        </td>
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>
             </div>

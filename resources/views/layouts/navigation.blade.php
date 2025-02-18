@@ -111,13 +111,7 @@
         </div>
     </div>
 </nav>
-<style>
-    td{
-        padding: 1rem;
-    }
-
-    .actions{
-        display: flex;
-        gap: 1rem;
-    }
-</style>
+<?php
+$baseURL = "http://$_SERVER[HTTP_HOST]/TP_Laravel/";
+?>
+<link rel="stylesheet" href="<?php echo $baseURL; ?>/resources/css/style.css">
