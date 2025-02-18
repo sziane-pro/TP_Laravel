@@ -65,7 +65,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/payments/{id}/generate-bill', [PaymentController::class, 'generateBill'])->name('payments.generateBill');
     
 
-    // Route pour les impots
+    // Route pour les impots (prends en compte tout les utilisateurs, sorry)
     Route::get('/taxes', [PaymentController::class, 'taxDeclaration'])->name('taxes.index');
 
 });

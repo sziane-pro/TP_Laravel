@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Payment;
 use App\Models\Contracts;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -62,7 +63,6 @@ class PaymentController extends Controller
 
     public function taxDeclaration()
     {
-        $contracts = Contracts::where('user_id', Auth::id())->get();
         $totalRevenue = Payment::where('status', 'payé')->sum('amount_paid');
 
         if ($totalRevenue <= 15000) {
