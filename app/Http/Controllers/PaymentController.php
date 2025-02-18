@@ -75,7 +75,7 @@ class PaymentController extends Controller
             $imposableAmount = $totalRevenue;
         }
 
-        return view('taxes.index', compact('totalRevenue', 'regime', 'declarationCase', 'imposableAmount', 'contracts'));
+        return view('taxes.index', compact('totalRevenue', 'regime', 'declarationCase', 'imposableAmount'));
     }
 
 }
