@@ -12,6 +12,7 @@ class Payment extends Model
         'date_payment_received',
         'amount_paid',
         'status',
+        'bill_path',
     ];
 
     public function contract()

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Payment;
 use App\Models\Contracts;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PaymentController extends Controller
 {
@@ -41,4 +43,21 @@ class PaymentController extends Controller
         ]);
         return redirect()->back()->with('success', 'Paiement mis à jour avec succès.');
     }
+
+    public function generateBill($id)
+    {
+        $payment = Payment::findOrFail($id);
+
+        $billFileName = 'facture_' . $payment->id . '_' . time() . '.pdf';
+        $billPath = 'bills/' . $billFileName;
+
+        $pdf = Pdf::loadView('bills.template', compact('payment'));
+
+        Storage::disk('public')->put($billPath, $pdf->output());
+
+        $payment->update(['bill_path' => $billPath]);
+
+        return back()->with('success', 'Facture générée avec succès.');
+    }
+
 }

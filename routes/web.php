@@ -7,6 +7,7 @@ use App\Http\Controllers\ContractModelController;
 use App\Http\Controllers\ContractController;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Log;
 
 Route::get('/', function () {
     return view('welcome');
@@ -61,6 +62,7 @@ Route::middleware('auth')->group(function () {
     // Routes pour le suivi des paiements
     Route::get('/contracts/{id}/payments', [PaymentController::class, 'index'])->name('payments.index');
     Route::put('/payments/{id}', [PaymentController::class, 'update'])->name('payments.update');
+    Route::post('/payments/{id}/generate-bill', [PaymentController::class, 'generateBill'])->name('payments.generateBill');
 
 });
 
