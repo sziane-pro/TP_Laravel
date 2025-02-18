@@ -63,6 +63,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/contracts/{id}/payments', [PaymentController::class, 'index'])->name('payments.index');
     Route::put('/payments/{id}', [PaymentController::class, 'update'])->name('payments.update');
     Route::post('/payments/{id}/generate-bill', [PaymentController::class, 'generateBill'])->name('payments.generateBill');
+    
+
+    // Route pour les impots
+    Route::get('/taxes', [PaymentController::class, 'taxDeclaration'])->name('taxes.index');
 
 });
 

@@ -60,4 +60,21 @@ class PaymentController extends Controller
         return back()->with('success', 'Facture générée avec succès.');
     }
 
+    public function taxDeclaration()
+    {
+        $totalRevenue = Payment::where('status', 'payé')->sum('amount_paid');
+
+        if ($totalRevenue <= 15000) {
+            $regime = "Micro-foncier";
+            $declarationCase = "4BE (Déclaration n°2042)";
+            $imposableAmount = $totalRevenue * 0.70;
+        } else {
+            $regime = "Régime Réel";
+            $declarationCase = "4BA (Déclaration n°2044)";
+            $imposableAmount = $totalRevenue;
+        }
+
+        return view('taxes.index', compact('totalRevenue', 'regime', 'declarationCase', 'imposableAmount'));
+    }
+
 }
