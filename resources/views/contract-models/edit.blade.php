@@ -26,7 +26,7 @@
                             </div>
                             <div id="editor"></div>
                             <input type="hidden" name="content" id="content" value="{{ $contractModels->content }}">
-                            <button type="submit" class="btn btn-success mt-3">Mettre à jour</button>
+                            <button type="submit" class="btn btn-blue">Mettre à jour</button>
                         </form>
                     </div>
 

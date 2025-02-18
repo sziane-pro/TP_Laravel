@@ -16,10 +16,13 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="wrapper">
+                        <p>Id : <strong>{{ $boxes->id }}</strong></p>
                         <p>Nom : <strong>{{ $boxes->name }}</strong></p>
                         <p>Adresse : <strong>{{ $boxes->address }}</strong></p>
                         <p>Prix : <strong>{{ $boxes->price }}</strong>€</p>
                         <p>Superficie : <strong>{{ $boxes->size }}</strong> m<sup>2</sup></p>
+                        <p>Owner id : <strong>{{ $boxes->user_id }}</strong> </p>
+                        <a href="{{ route('boxes.index') }}" class="btn btn-blue">Retour</a>
                     </div>
                 </div>
             </div>

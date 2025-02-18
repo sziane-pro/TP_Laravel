@@ -34,7 +34,7 @@
                                 <label for="size">Superficie</label>
                                 <input type="text" name="size" id="size">
                             </div>
-                            <button type="submit" class="btn btn-blue">Ajouter</button>
+                            <button type="submit" class="btn btn-green">Ajouter</button>
                         </form>
                     </div>
                 </div>

@@ -9,53 +9,45 @@
 </head>
 <x-app-layout>
     <x-slot name="header">
-        <h1 class="mb-4">Liste des locataires</h1>
+        <h1 class="mb-4">Liste des Locataires</h1>   
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <div class="container text-light">
-                        <hr>
-                        <a href="{{ route('tenants.create') }}" class="btn btn-primary">Ajouter un locataire</a>
-                        <hr>
-                        <div class="row d-flex justify-content-between align-items-center">
+                    <div class="wrapper">
+                        <a href="{{ route('tenants.create') }}" class="btn btn-green">Ajouter un locataire</a>
+                        <div>
                             <table>
                                 <thead>
-                                    <th class="p-3">Id</th>
-                                    <th class="p-3">Nom</th>
-                                    <th class="p-3">Prénom</th>
-                                    <th class="p-3">Email</th>
-                                    <th class="p-3">Téléphone</th>
-                                    <th class="p-3">Adresse</th>
-                                    <th class="p-3">IBAN</th>
-                                    <th class="p-3">Owner ID</th>
+                                    <th>Nom</th>
+                                    <th>Prénom</th>
+                                    <th>Email</th>
+                                    <th>Téléphone</th>
+                                    <th>Adresse</th>
+                                    <th>IBAN</th>
+                                    <th>Actions</th>
                                 </thead>
                                 <tbody>
                                     @foreach ($tenants as $tenant)
                                         <tr>
-                                            <td class="p-3">{{ $tenant->id }}</td>
-                                            <td class="p-3">{{ $tenant->lastname }}</td>
-                                            <td class="p-3">{{ $tenant->firstname }}</td>
-                                            <td class="p-3">{{ $tenant->email }}</td>
-                                            <td class="p-3">{{ $tenant->phone }}</td>
-                                            <td class="p-3">{{ $tenant->address }}</td>
-                                            <td class="p-3">{{ $tenant->IBAN }}</td>
-                                            <td class="p-3">{{ $tenant->user_id }}</td>
-                                            <td class="p-3"> <a href="{{ route('tenants.edit', $tenant->id) }}"
-                                                    class="btn btn-light">Modifier</a></td>
-                                            <td class="p-3"><a href="{{ route('tenants.show', $tenant->id) }}"
-                                                    class="btn btn-light">Voir</a></td>
-                                        </tr>
-
-                                        <td class="p-3">
+                                            <td>{{ $tenant->lastname }}</td>
+                                            <td>{{ $tenant->firstname }}</td>
+                                            <td>{{ $tenant->email }}</td>
+                                            <td>{{ $tenant->phone }}</td>
+                                            <td>{{ $tenant->address }}</td>
+                                            <td>{{ $tenant->IBAN }}</td>
+                                            <td class="actions"> <a href="{{ route('tenants.edit', $tenant->id) }}"
+                                                    class="btn btn-blue">Modifier</a><a href="{{ route('tenants.show', $tenant->id) }}"
+                                                    class="btn btn-blue">Voir</a>
                                             <form action="{{ route('tenants.destroy') }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <input type="hidden" value="{{ $tenant->id }}" name="id">
-                                                <button class="btn btn-danger" type="submit">Supprimer</button>
+                                                <button class="btn btn-red" type="submit">Supprimer</button>
                                             </form>
-                                        </td>
+                                            </td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>

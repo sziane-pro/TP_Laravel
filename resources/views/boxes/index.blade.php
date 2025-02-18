@@ -17,10 +17,9 @@
                 <div class="p-6 text-gray-900">
                     <div class="wrapper">
                         <a href="{{ route('boxes.create') }}" class="btn btn-green">Ajouter un box</a>
-                        <div class="">
+                        <div>
                             <table>
                                 <thead>
-                                    <th>Id</th>
                                     <th>Nom</th>
                                     <th>Adresse</th>
                                     <th>Prix</th>
@@ -30,7 +29,6 @@
                                 <tbody>
                                     @foreach ($boxes as $box)
                                         <tr>
-                                            <td>{{ $box->id }}</td>
                                             <td>{{ $box->name }}</td>
                                             <td>{{ $box->address }}</td>
                                             <td>{{ $box->price }}€</td>
