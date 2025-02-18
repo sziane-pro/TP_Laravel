@@ -62,6 +62,7 @@ class PaymentController extends Controller
 
     public function taxDeclaration()
     {
+        $contracts = Contracts::where('user_id', Auth::id())->get();
         $totalRevenue = Payment::where('status', 'payé')->sum('amount_paid');
 
         if ($totalRevenue <= 15000) {
@@ -74,7 +75,7 @@ class PaymentController extends Controller
             $imposableAmount = $totalRevenue;
         }
 
-        return view('taxes.index', compact('totalRevenue', 'regime', 'declarationCase', 'imposableAmount'));
+        return view('taxes.index', compact('totalRevenue', 'regime', 'declarationCase', 'imposableAmount', 'contracts'));
     }
 
 }
