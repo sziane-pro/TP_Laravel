@@ -24,7 +24,7 @@
                             </div>
                             <div id="editorjs"></div>
                             <input type="hidden" name="content" id="content">
-                            <button type="submit" class="btn btn-success mt-3">Enregistrer</button>
+                            <button type="submit" class="btn btn-green">Enregistrer</button>
                         </form>
                     </div>
                     <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
