@@ -112,6 +112,6 @@
     </div>
 </nav>
 <?php
-$baseURL = "http://$_SERVER[HTTP_HOST]/TP_Laravel/";
+$baseURL = "http://$_SERVER[HTTP_HOST]";
 ?>
 <link rel="stylesheet" href="<?php echo $baseURL; ?>/build/assets/style.css">
